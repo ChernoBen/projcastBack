@@ -22,6 +22,18 @@ class HomeController{
 
     }
 
+    //listar pessoa
+    async listPerson(req,res){
+        let {id} = req.body
+        await Person.listar(id).then(response=>{
+            console.log(response)
+            return res.json({response:response})
+        }).catch(error=>{
+            console.log(error)
+            return res.status(400).json({error:error})
+        })
+    }
+
 }
 
 module.exports = new HomeController();
