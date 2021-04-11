@@ -2,11 +2,10 @@
 exports.up = function(knex) {
   return knex.schema.createTable('personagens',function(table){
     table.increments('id')
-    table.text('autor').notNullable()
-    table.text('titulo').notNullable()
-    table.text('conteudo').notNullable()
+    table.bigInteger('autor')
+    table.text('titulo')
+    table.text('conteudo')
     table.timestamp('date').defaultTo(knex.fn.now())
-    table.timestamp('atualizacao').defaultTo(knex.fn.now())
 
   })
 };
