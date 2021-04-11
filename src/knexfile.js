@@ -10,6 +10,10 @@ module.exports = {
       user : 'root',
       password : 'Sapiencia123',
       database : 'apiusers'
+    },
+    migrations:{
+      tableName:'knex_migrations',
+      directory:`${__dirname}/database/migrations`
     }
   }
 };
