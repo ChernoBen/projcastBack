@@ -2,7 +2,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable('personagens',function(table){
     table.increments('id')
-    table.bigInteger('autor')
+    table.integer('autor').unsigned().references("id").inTable('users')
     table.text('titulo')
     table.text('conteudo')
     table.timestamp('date').defaultTo(knex.fn.now())
