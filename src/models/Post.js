@@ -20,11 +20,11 @@ class Person{
             await knex.select('').from('personagens').where({id:id}).table('personagens').then(response=>{
                 console.log(response)
                 return {status:1,response:response}
-            }).catch{error=>{
+            }).catch(error=>{
                 console.log(error)
                 return {status:0}
-            }}
-            
+            })
+
         }else{
             await knex.select('').from('personagens').table('personagens').then(response=>{
                 console.log(response)
