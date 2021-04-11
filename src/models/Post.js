@@ -5,57 +5,49 @@ class Person{
     //criação de personagem
     async criar(autor,titulo,conteudo){
         let date = new Date()
-        await knex.insert({autor,titulo,conteudo,date}).table('personagens').then(response=>{
-            return {status:1}
-        }).catch(err=>{
+        let result = await knex.insert({autor,titulo,conteudo,date}).table('personagens').catch(err=>{
             console.log(error)
             return {status:0}
         })
+        return {status:1,result:result}
     }
 
     //listar personagem // para litar todos passar id = false
     async listar(id){
         let result
         if (id){
-            await knex.select('').from('personagens').where({id:id}).table('personagens').then(response=>{
-                console.log(response)
-                return {status:1,response:response}
-            }).catch(error=>{
+            let result = await knex.select(['id','titulo','autor','conteudo','date']).from('personagens').where({id:id}).table('personagens').catch(error=>{
                 console.log(error)
                 return {status:0}
             })
+            return {status:1,response:result}
 
         }else{
-            await knex.select('').from('personagens').table('personagens').then(response=>{
-                console.log(response)
-                return {status:1,response:response}
-            }).catch(error=>{
+            let result = await knex.select(['id','titulo','autor','conteudo','date']).from('personagens').table('personagens').catch(error=>{
                 console.log(error)
                 return {status:0}
             })
+            return {status:1,response:result}
         }
     }
 
     //editar personagem
     async update(id,autor,titulo,conteudo){
-        await knex.update({autor,titulo,conteudo}).where({id:id}).table('personagens').then(response=>{
-            console.log(response)
-            return {status:1,response:response}
-        }).catch(error=>{
+        let result = await knex.update({autor,titulo,conteudo}).where({id:id}).table('personagens').catch(error=>{
             console.log(error)
             return {status:0}
         })
+
+        return {status:1,response:response}
     }
 
     //deletar personagem
     async delete(id){
-        await knex.delete().from('personagens').where({id:id}).then(response=>{
-            console.log(response)
-            return {status:1,response:response}
-        }).catch(error=>{
+        await knex.delete().from('personagens').where({id:id}).catch(error=>{
             console.log(error)
             return {status:0}
         })
+        return {status:1,response:result}
     }
 
 }
