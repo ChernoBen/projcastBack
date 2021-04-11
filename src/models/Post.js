@@ -59,3 +59,4 @@ class Person{
     }
 
 }
+module.exports = new Person()
