@@ -1,6 +1,7 @@
 class HomeController{
 
-    async index(req, res){
+    async create(req, res){
+        
         res.send("APP EXPRESS! - Guia do programador");
     }
 
