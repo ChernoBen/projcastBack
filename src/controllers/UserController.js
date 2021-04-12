@@ -30,7 +30,7 @@ class UserController{
     //login
     async login(req,res){
         let {email,senha} = req.body
-        let user = await User.findByEmail().catch(error=>{
+        let user = await User.findByEmail(email).catch(error=>{
             console.log(email)
         })
         if (user != undefined){

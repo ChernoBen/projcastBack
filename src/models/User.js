@@ -4,14 +4,14 @@ const PasswordToken = require("./PasswordToken")
 
 class User {
 
-    async create(email, senha, nome) {
+    async create(nome,email,senha) {
 
         var hash = await bcrypt.hash(senha, 10).catch(error => {
 
             console.log(error)
         });
 
-        let result = await knex.insert({ email, senha: hash, nome}).table("users").catch(err => {
+        let result = await knex.insert({ email:email, senha:hash, nome:nome}).table("users").catch(err => {
 
             console.log(err)
         })
@@ -20,20 +20,19 @@ class User {
     }
     
     async findByEmail(email){
-        
-        var result = await knex.select("email").from("users").where({ email: email }).catch(err => {
 
-            console.log(err)
+        let result = await knex.select(["id", "email","senha", "nome"]).from("users").where({ email: email }).catch(err => {
 
+            return undefined
         })
 
-        if (result.length > 0) {
+        if (result.length > 0){
+            console.log(result)
+            return result[0]
+            
+        }else{
 
-            return true
-
-        } else {
-
-            return false
+            return undefined
         }
     }
 
